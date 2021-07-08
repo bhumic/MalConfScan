@@ -20,6 +20,21 @@ rule TSCookie {
           condition: all of them
 }
 
+rule Dridex {
+          meta:
+            description = "detect Dridex in memory"
+            author = "Bruno Humic"
+            rule_usage = "memory scan"
+            reference = "internal research"
+
+          strings:
+            $ep = { 55 8B EC 51 56 6A ?? 8D 4D ?? E8 ?? ?? ?? ?? 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? E8 ?? ?? ?? ?? A3 ?? ?? ?? ?? A0 ?? ?? ?? ?? 84 C0 74 }
+            $exception_handler_ep = { 55 8B EC 81 EC ?? ?? ?? ?? 56 8B 75 ?? 8B ?? 8B 00 3D FD 00 C0 77 }
+            $exception_handler_ctx_mod = {  8B 46 04 B9 FC FF FF FF 01 88 C4 00 00 00 8B 46 04 8B 90 B8 00 00 00 8B 80 C4 00 00 00 42 89 10 8B 46 04 01 88 C4 00 00 00 8B 46 04 8B 88 C4 00 00 00 8B 90 B0 00 00 00 89 11 83 C8 FF 5E 8B E5 5D C2 }
+
+          condition: all of them
+}
+
 rule TSC_Loader {
           meta:
             description = "detect TSCookie Loader in memory"
